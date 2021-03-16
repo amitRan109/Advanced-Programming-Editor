@@ -10,7 +10,8 @@ class Document{
     vector<string> data;
     vector<string>::iterator it;
     public:
-    Document(vector<string> v):data(v), it(v.begin()){}
+    Document(){}
+    void init(vector<string> v);
     void plus(int num);
     void minus(int num);
     void dollar();
@@ -22,6 +23,6 @@ class Document{
     void slash(string text);
     void j();
     void s(string old_text, string new_text);
-    // void w(File file);
+    void w(string fileName);
     void insertText(vector<string> text);
 };

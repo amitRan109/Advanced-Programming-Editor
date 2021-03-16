@@ -1,36 +1,23 @@
 #include "Document.h"
+#include <fstream>
+#include <iostream>
 using namespace std;
 
+void Document::init(vector<string> v){
+    data = v; it = v.begin();
+}
+
 void Document::plus(int num) {
-    try{
-        it += num;
-        cout << *it << endl;
-    }
-    catch(exception e){
-        cout << e.what() << endl;
-    }
+    it += num;
 }
 void Document::minus(int num){
-    try{
-        it -= num;
-        // cout <<  << endl;
-    }
-    catch(exception e){
-        cout << e.what() << endl;
-    }
+    it -= num;
 }
 void Document::dollar(){
     it = --data.end();
-    cout << *it << endl;
 }
 void Document::num(int num){
-    try{
-        it = data.begin() + (num-1);
-        cout << *it << endl;
-    }
-    catch(exception e){
-        cout << e.what() << endl;
-    }
+    it = data.begin() + (num-1);
 }
 
 void Document::a(vector<string> text){
@@ -63,9 +50,11 @@ void Document::s(string old_text,string new_text){
     int idx = it->find_first_of(old_text);
     it->replace(idx, old_text.size(),new_text);
 }
-// void Document::w(File file){
-
-// }
+void Document::w(string fileName){
+    ofstream file(fileName);
+    ostream_iterator<string> file_it(file,"\n");
+    copy(data.begin(), data.end(), file_it);
+}
 void Document::insertText(vector<string> text){
     for(int i=0; i<text.size();i++){
         data.insert(it++,text[i]);   
